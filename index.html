@@ -1,0 +1,444 @@
+<title>Brian&amp;Brian Social</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+<style>
+/* Layout: full-bleed gradient bands lifted from the B&B deck (blue, coral, ink), each with a 1240px inner column; work is shown as playing phone tiles with VHS overlays. */
+:root{
+  --ink:#16112E;          /* deep violet-black: text on light, ground for work + reactive */
+  --paper:#FFF6EE;        /* warm off-white for services */
+  --sky:#18C9FF; --blue:#3A63FF; --violet:#7A3CF0;   /* deck blue gradient */
+  --coral:#FF6B57; --pink:#FF9BC6;                   /* deck coral gradient */
+  --lemon:#FFE53B;        /* the "ACTUAL CUSTOMER" sticker yellow */
+  --heads:#F47E86;        /* the pink heads */
+  --white:#FFFFFF;
+  --muted-ink:#4D4566;
+  --g-blue:linear-gradient(160deg,var(--sky) 0%,var(--blue) 45%,var(--violet) 100%);
+  --g-coral:linear-gradient(160deg,var(--pink) 0%,var(--coral) 100%);
+  --f-display:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --f-body:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --f-vhs:"VT323","Courier New",ui-monospace,monospace;
+  --wrap:1240px;
+  --radius:22px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--white);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:.95;letter-spacing:-.02em;margin:0;text-wrap:balance}
+p{margin:0}
+ul{list-style:none;margin:0;padding:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lemon);outline-offset:3px}
+.band{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:var(--wrap);margin-inline:auto}
+.eyebrow{font-family:var(--f-body);font-weight:400;font-size:15px;letter-spacing:.12em;text-transform:uppercase;line-height:1}
+.aside{font-style:italic;opacity:.85}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:700;font-size:22px;letter-spacing:-.02em}
+.brand img{width:52px;height:auto}
+.nav ol{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:400;font-size:15px}
+.nav ol a{text-decoration:none;opacity:.85}
+.nav ol a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.nav ol span{font-size:13px;color:var(--heads);margin-right:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:400;font-size:15px;text-decoration:none;border:2px solid currentColor;transition:transform .15s ease,background .15s ease;cursor:pointer;background:transparent}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--lemon);color:var(--ink);border-color:var(--lemon)}
+.btn-ink{background:var(--ink);color:var(--white);border-color:var(--ink)}
+
+/* hero */
+.hero{background:var(--g-blue);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:64px 80px}
+.hero-copy{min-width:0;display:grid;gap:24px;position:relative;z-index:6}
+.hero h1{font-size:clamp(48px,7.2vw,106px);text-transform:uppercase;line-height:.9}
+.hero h1 em{font-style:normal;color:var(--lemon)}
+.hero .lede{font-size:clamp(18px,1.6vw,21px);max-width:34ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.heads-row{display:flex;align-items:center;gap:14px}
+.heads-row img{width:96px}
+.phones{position:relative;display:flex;justify-content:center;align-items:center;min-height:520px}
+.phone{--h:440px;height:var(--h);border:6px solid var(--ink);border-radius:26px;box-shadow:10px 12px 0 var(--ink)}
+.phones .p1{transform:rotate(-7deg) translateX(40px);z-index:1}
+.phones .p2{transform:translateY(-18px);z-index:3;--h:480px}
+.phones .p3{transform:rotate(6deg) translateX(-40px);z-index:2}
+.sticker{position:absolute;top:6px;right:0;z-index:5;background:var(--lemon);color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:8px 18px;font-family:var(--f-display);font-weight:700;font-size:17px;line-height:1.05;text-align:center;transform:rotate(9deg);text-transform:uppercase}
+
+/* tiles */
+.tile{display:block;position:relative;aspect-ratio:var(--ar);height:var(--h,360px);padding:0;margin:0;border:0;border-radius:14px;overflow:hidden;background:#000 var(--poster) center/cover no-repeat;cursor:pointer;flex:none;max-width:100%;-webkit-appearance:none;appearance:none}
+.tile video,.tile img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+.tile .vhs{position:absolute;font-family:var(--f-vhs);color:var(--white);text-shadow:2px 2px 0 rgba(0,0,0,.65);font-size:20px;line-height:1;pointer-events:none;letter-spacing:.04em}
+.vhs-play{top:10px;left:12px}
+.vhs-tc{bottom:10px;right:12px}
+.tile::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.08) 0 1px,transparent 1px 3px);pointer-events:none;opacity:.7}
+.tile:hover .vhs-play::after{content:" SOUND ON"}
+.tile.still .vhs-play{opacity:.9}
+.tile:hover{filter:saturate(1.15)}
+
+/* marquee */
+.logos{background:var(--white);color:var(--ink);padding-block:28px;overflow:hidden}
+.logos .wrap{display:grid;gap:18px}
+.logos p{font-weight:400;font-size:15px}
+.logos p .aside{font-weight:400}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.track{display:flex;gap:16px;width:max-content;animation:scroll 48s linear infinite}
+.logo{height:78px;min-width:132px;padding:12px 18px;display:grid;place-items:center;border:2px solid var(--ink);border-radius:12px;box-shadow:4px 4px 0 var(--ink);background:var(--white)}
+.logo img{max-height:50px;max-width:120px;width:auto;object-fit:contain}
+.logo-word{font-family:var(--f-display);font-weight:700;font-size:19px;white-space:nowrap}
+@keyframes scroll{to{transform:translateX(calc(-50% - 8px))}}
+
+/* statement */
+.statement{background:var(--g-coral);color:var(--ink)}
+.statement .wrap{padding-block:88px;display:grid;gap:22px}
+.statement h2{font-size:clamp(40px,6.4vw,92px);max-width:16ch}
+.statement p{font-size:clamp(18px,1.7vw,22px);max-width:46ch;color:var(--ink)}
+
+/* section heads */
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px;margin-bottom:36px}
+.sec-head h2{font-size:clamp(44px,6vw,84px);text-transform:uppercase}
+.sec-head p{max-width:40ch;opacity:.85}
+
+/* work */
+.work .wrap{padding-block:88px;display:grid;gap:28px}
+.case{border-radius:var(--radius);padding:clamp(22px,3.4vw,44px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(20px,3vw,44px);align-items:center;overflow:hidden}
+.case:nth-child(even of .case){grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}
+.case:nth-child(even of .case) .case-copy{order:2}
+.tone-blue{background:var(--g-blue);color:var(--white)}
+.tone-coral{background:var(--g-coral);color:var(--ink)}
+.case-copy{display:grid;gap:14px;min-width:0}
+.case-client{font-size:15px;text-transform:uppercase;letter-spacing:.12em}
+.case h3{font-size:clamp(34px,4vw,56px)}
+.case-line{font-size:18px;max-width:42ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.chips li{border:2px solid currentColor;border-radius:999px;padding:4px 12px;font-size:14px;font-weight:400}
+.case-media{display:flex;gap:12px;align-items:flex-start;padding:0 8px 8px 0;min-width:0}
+.case-media .tile{flex:var(--fw) 1 0%;width:0;height:auto;max-height:440px;box-shadow:6px 6px 0 var(--ink);border:3px solid var(--ink)}
+
+/* more */
+.more .wrap{padding-block:0 96px}
+.more-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.more-item{margin:0;display:grid;gap:10px;align-content:start;min-width:0}
+.more-item .tile{width:100%;height:auto;aspect-ratio:4/5;border:3px solid var(--white)}
+.more-item figcaption{display:grid;font-size:15px;font-weight:400}
+.more-item figcaption strong{font-weight:400}
+.more-item figcaption span{font-size:13px;letter-spacing:.1em;color:var(--pink);text-transform:uppercase}
+
+/* reactive */
+.reactive{background:var(--lemon);color:var(--ink)}
+.reactive .wrap{padding-block:88px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.reactive h2{font-size:clamp(44px,6vw,84px);text-transform:uppercase}
+.reactive .copy{display:grid;gap:18px;position:sticky;top:96px}
+.reactive .copy p{font-size:19px;max-width:40ch}
+.reactive .copy .kicker{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,2.4vw,32px);line-height:1.1}
+.newswall{display:grid;gap:14px;min-width:0}
+.news-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.news-grid .tile{--h:auto;width:100%;height:auto;border-radius:8px}
+.news-grid .vhs{display:none}
+.newswall .wide{--h:auto;width:100%;height:auto;border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+.newswall figcaption{font-size:15px;font-weight:400}
+
+/* services */
+.services{background:var(--paper);color:var(--ink)}
+.services .wrap{padding-block:88px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.svc{background:var(--white);border:2px solid var(--ink);border-radius:16px;padding:22px 24px;display:grid;gap:6px}
+.svc h4{font-size:24px;letter-spacing:-.01em}
+.svc p{color:var(--muted-ink)}
+.svc-hi{background:var(--ink);color:var(--white)}
+.svc-hi p{color:var(--pink)}
+.versus{margin-top:40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.versus > div{border-radius:16px;padding:26px 28px;display:grid;gap:10px;align-content:start}
+.versus h4{font-size:26px}
+.versus li{padding-left:20px;position:relative}
+.versus li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;border-radius:50%;background:currentColor}
+.vs-one{border:2px dashed var(--ink);color:var(--muted-ink)}
+.vs-one h4{color:var(--ink)}
+.vs-two{background:var(--g-coral);color:var(--ink)}
+
+/* meet */
+.meet{background:var(--g-blue)}
+.meet .wrap{padding-block:88px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,64px);align-items:center}
+.meet .copy{display:grid;gap:18px}
+.meet h2{font-size:clamp(44px,6vw,84px)}
+.meet .copy p{font-size:19px;max-width:46ch}
+.meet .credits{font-size:14px;letter-spacing:.12em;text-transform:uppercase;opacity:.95}
+.us-tile{--h:auto;width:min(380px,100%);height:auto;margin-inline:auto;transform:rotate(2deg);border:4px solid var(--ink);box-shadow:10px 10px 0 var(--ink)}
+
+/* contact */
+.contact{background:var(--g-coral);color:var(--ink)}
+.contact .wrap{padding-block:96px;display:grid;gap:28px}
+.contact h2{font-size:clamp(64px,11vw,160px)}
+.contact-rows{display:grid;gap:12px;max-width:760px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;border-top:2px solid var(--ink);padding-top:12px}
+.row .lbl{font-size:14px;letter-spacing:.12em;text-transform:uppercase;width:72px}
+.row .val{font-family:var(--f-body);font-weight:400;font-size:clamp(20px,2.6vw,30px);flex:1;min-width:0;overflow-wrap:anywhere;user-select:all}
+.copy-btn{border:2px solid var(--ink);background:transparent;border-radius:999px;padding:6px 14px;font-weight:400;font-size:14px;cursor:pointer}
+.copy-btn[data-done]{background:var(--ink);color:var(--white)}
+
+footer{background:var(--ink)}
+footer .wrap{padding-block:36px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;font-size:14px;opacity:.9}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(10,7,26,.92);display:grid;place-items:center;padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb-inner{position:relative;max-width:min(92vw,1100px);max-height:86vh;display:grid}
+.lb video,.lb img{max-height:86vh;max-width:100%;width:auto;border-radius:12px;background:#000}
+.lb-close{position:absolute;top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));background:var(--lemon);color:var(--ink);border:0;border-radius:999px;padding:10px 18px;font-weight:400;cursor:pointer}
+
+@media (max-width:900px){
+  .nav ol{display:none}
+  .hero .wrap,.reactive .wrap,.meet .wrap{grid-template-columns:1fr}
+  .phones{min-height:380px}
+  .phone{--h:320px}.phones .p2{--h:350px}
+  .case,.case:nth-child(even of .case){grid-template-columns:1fr}
+  .case:nth-child(even of .case) .case-copy{order:0}
+  .reactive .copy{position:static}
+  .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .more-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .hero h1{font-size:clamp(40px,13vw,64px)}
+  .case-media{overflow-x:auto;scrollbar-width:thin;padding-bottom:12px}
+  .case-media .tile{flex:none;width:auto;height:320px;max-height:none}
+  .phones .tile{--h:200px}.phones .p2{--h:225px}
+  .phones .p1{transform:rotate(-7deg) translateX(30px)}.phones .p3{transform:rotate(6deg) translateX(-30px)}
+  .phones .vhs{font-size:15px}
+  .phone{border-width:4px;border-radius:18px;box-shadow:6px 7px 0 var(--ink)}
+  .phones{min-height:290px}
+  .sticker{font-size:13px;padding:6px 12px}
+  .news-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .svc-grid,.versus{grid-template-columns:1fr}
+  .more-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .brand span{display:none}
+  .nav .btn{padding:9px 14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .track{animation:none;flex-wrap:wrap;width:auto}
+  .track [aria-hidden="true"]{display:none}
+  .btn:hover{transform:none}
+}
+</style>
+
+<header class="nav band">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="heads.png" alt=""><span>Brian&amp;Brian</span></a>
+    <ol>
+      <li><a href="#work"><span>01</span>Work</a></li>
+      <li><a href="#reactive"><span>02</span>Reactive</a></li>
+      <li><a href="#what"><span>03</span>What we do</a></li>
+      <li><a href="#meet"><span>04</span>Meet us</a></li>
+    </ol>
+    <a class="btn btn-solid" href="#talk">Talk to us</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero band">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="heads-row"><img src="heads.png" alt="The Brian&amp;Brian heads"><p class="eyebrow">Content creators · Social specialists</p></div>
+      <h1>Thumb-<wbr>stopping <em>social.</em></h1>
+      <p class="lede">Short-form video, reactive posts and social series from two award-winning creatives who met at 4creative, Channel&nbsp;4’s in-house agency.</p>
+      <div class="ctas"><a class="btn btn-solid" href="#work">See the work</a><a class="btn" href="#talk">Talk to us</a></div>
+    </div>
+    <div class="phones">
+      <span class="sticker">Actual<br>work*</span>
+      <button class="tile phone p1" style="--ar:480/854;--fw:0.562;--poster:url(media/dexter-thumbs.jpg)" data-video="media/dexter-thumbs.mp4" data-poster="media/dexter-thumbs.jpg" aria-label="Play Dexter: Place your thumbs here with sound"><video src="media/dexter-thumbs.mp4" poster="media/dexter-thumbs.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><button class="tile phone p2" style="--ar:480/854;--fw:0.562;--poster:url(media/wicks-reel-web.jpg)" data-video="media/wicks-reel-web.mp4" data-poster="media/wicks-reel-web.jpg" aria-label="Play Joe Wicks: Licensed to Kill reel with sound"><video src="media/wicks-reel-web.mp4" poster="media/wicks-reel-web.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><button class="tile phone p3" style="--ar:480/854;--fw:0.562;--poster:url(media/gogglebox-tiktok.jpg)" data-video="media/gogglebox-tiktok.mp4" data-poster="media/gogglebox-tiktok.jpg" aria-label="Play Celebrity Gogglebox TikTok with sound"><video src="media/gogglebox-tiktok.mp4" poster="media/gogglebox-tiktok.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button>
+    </div>
+  </div>
+</section>
+
+<section class="logos band" aria-label="Brands we’ve worked with">
+  <div class="wrap">
+    <p>Brands we’ve worked with <span class="aside">(and survived)</span></p>
+    <div class="marquee"><ul class="track"><li class="logo"><img src="logos/c4new.png" alt="Channel 4" loading="lazy"></li><li class="logo"><img src="logos/currys.png" alt="Currys" loading="lazy"></li><li class="logo logo-word">Screwfix</li><li class="logo"><img src="logos/slice.png" alt="Slice House" loading="lazy"></li><li class="logo"><img src="logos/monzo.png" alt="Monzo" loading="lazy"></li><li class="logo"><img src="logos/rep.png" alt="Rep" loading="lazy"></li><li class="logo"><img src="logos/nerdy.png" alt="Nerdy Banana" loading="lazy"></li><li class="logo"><img src="logos/toolstation.png" alt="Toolstation" loading="lazy"></li><li class="logo"><img src="logos/bosch.png" alt="Bosch" loading="lazy"></li><li class="logo"><img src="logos/ft.png" alt="Financial Times" loading="lazy"></li><li class="logo"><img src="logos/skybiz.png" alt="Sky Business" loading="lazy"></li><li class="logo"><img src="logos/bt.png" alt="BT" loading="lazy"></li><li class="logo"><img src="logos/wmg.png" alt="Warner Music Group" loading="lazy"></li><li class="logo"><img src="logos/bupa.png" alt="Bupa" loading="lazy"></li><li class="logo logo-word">The Telegraph</li><li class="logo logo-word">Fruitful Office</li><li class="logo"><img src="logos/mubi.png" alt="MUBI" loading="lazy"></li><li class="logo"><img src="logos/film4.png" alt="Film4" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/c4new.png" alt="Channel 4" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/currys.png" alt="Currys" loading="lazy"></li><li aria-hidden="true" class="logo logo-word">Screwfix</li><li aria-hidden="true" class="logo"><img src="logos/slice.png" alt="Slice House" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/monzo.png" alt="Monzo" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/rep.png" alt="Rep" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/nerdy.png" alt="Nerdy Banana" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/toolstation.png" alt="Toolstation" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/bosch.png" alt="Bosch" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/ft.png" alt="Financial Times" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/skybiz.png" alt="Sky Business" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/bt.png" alt="BT" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/wmg.png" alt="Warner Music Group" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/bupa.png" alt="Bupa" loading="lazy"></li><li aria-hidden="true" class="logo logo-word">The Telegraph</li><li aria-hidden="true" class="logo logo-word">Fruitful Office</li><li aria-hidden="true" class="logo"><img src="logos/mubi.png" alt="MUBI" loading="lazy"></li><li aria-hidden="true" class="logo"><img src="logos/film4.png" alt="Film4" loading="lazy"></li></ul></div>
+  </div>
+</section>
+
+<section class="statement band">
+  <div class="wrap">
+    <p class="eyebrow">*All real. Mostly Channel 4.</p>
+    <h2>Standard social posts? We’re not the Brians for you.</h2>
+    <p>We’re interested in elevating unexpected brands with unexpected, unbelievable social. Ideas, scripts, shoots and every cut-down, made by the same two people.</p>
+  </div>
+</section>
+
+<section class="work band" id="work">
+  <div class="wrap">
+    <div class="sec-head"><h2>Selected work</h2><p>Everything plays. Tap any tile to watch it with sound.</p></div>
+    
+<article class="case tone-blue" id="case-1">
+  <div class="case-copy">
+    <p class="case-client">Channel 4</p>
+    <h3>Joe Wicks: Licensed to Kill</h3>
+    <p class="case-line">A protein bar so bad for you, it got its own ad campaign. Gym-poster parodies, reels and feed films for Joe’s documentary about ultra-processed food.</p>
+    <ul class="chips"><li>Statics</li><li>Reels</li><li>Feed</li></ul>
+  </div>
+  <div class="case-media" role="list"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/wicks-reel-web.jpg)" data-video="media/wicks-reel-web.mp4" data-poster="media/wicks-reel-web.jpg" aria-label="Play Joe Wicks reel with sound"><video src="media/wicks-reel-web.mp4" poster="media/wicks-reel-web.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><button class="tile still " style="--ar:720/1280;--fw:0.562;--poster:url(media/wicks-s2.jpg)" data-image="media/wicks-s2.jpg" aria-label="View Gains Before Brains poster"><img src="media/wicks-s2.jpg" alt="Gains Before Brains poster" loading="lazy"><span class="vhs vhs-play">STILL</span></button><button class="tile still " style="--ar:720/1280;--fw:0.562;--poster:url(media/wicks-s1.jpg)" data-image="media/wicks-s1.jpg" aria-label="View Dumb Bells poster"><img src="media/wicks-s1.jpg" alt="Dumb Bells poster" loading="lazy"><span class="vhs vhs-play">STILL</span></button><button class="tile still " style="--ar:720/1280;--fw:0.562;--poster:url(media/wicks-s4.jpg)" data-image="media/wicks-s4.jpg" aria-label="View Maximum Reps poster"><img src="media/wicks-s4.jpg" alt="Maximum Reps poster" loading="lazy"><span class="vhs vhs-play">STILL</span></button></div>
+</article>
+<article class="case tone-coral" id="case-2">
+  <div class="case-copy">
+    <p class="case-client">Channel 4</p>
+    <h3>Dexter</h3>
+    <p class="case-line">One serial killer, four platforms. Place your thumbs here, a prank on mum, and the ritual in three lines.</p>
+    <ul class="chips"><li>TikTok</li><li>Snapchat</li><li>Reels</li><li>Shorts</li></ul>
+  </div>
+  <div class="case-media" role="list"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/dexter-thumbs.jpg)" data-video="media/dexter-thumbs.mp4" data-poster="media/dexter-thumbs.jpg" aria-label="Play Dexter: Place your thumbs here with sound"><video src="media/dexter-thumbs.mp4" poster="media/dexter-thumbs.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/dexter-prank.jpg)" data-video="media/dexter-prank.mp4" data-poster="media/dexter-prank.jpg" aria-label="Play Dexter prank on my mum with sound"><video src="media/dexter-prank.mp4" poster="media/dexter-prank.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/dexter-ritual.jpg)" data-video="media/dexter-ritual.mp4" data-poster="media/dexter-ritual.jpg" aria-label="Play Dexter: the ritual with sound"><video src="media/dexter-ritual.mp4" poster="media/dexter-ritual.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><button class="tile still " style="--ar:720/1280;--fw:0.562;--poster:url(media/dexter-killing.jpg)" data-image="media/dexter-killing.jpg" aria-label="View Killing it at work? static"><img src="media/dexter-killing.jpg" alt="Killing it at work? static" loading="lazy"><span class="vhs vhs-play">STILL</span></button></div>
+</article>
+<article class="case tone-blue" id="case-3">
+  <div class="case-copy">
+    <p class="case-client">E4</p>
+    <h3>Married at First Sight UK</h3>
+    <p class="case-line">A new question every week. Motion posters, polls, carousels and a TikTok filter for the UK’s most chaotic wedding.</p>
+    <ul class="chips"><li>Motion posters</li><li>Polls</li><li>TikTok filter</li></ul>
+  </div>
+  <div class="case-media" role="list"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/mafs-w1.jpg)" data-video="media/mafs-w1.mp4" data-poster="media/mafs-w1.jpg" aria-label="Play MAFS UK weekly poster 1 with sound"><video src="media/mafs-w1.mp4" poster="media/mafs-w1.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/mafs-w3.jpg)" data-video="media/mafs-w3.mp4" data-poster="media/mafs-w3.jpg" aria-label="Play MAFS UK weekly poster 3 with sound"><video src="media/mafs-w3.mp4" poster="media/mafs-w3.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/mafs-w4.jpg)" data-video="media/mafs-w4.mp4" data-poster="media/mafs-w4.jpg" aria-label="Play MAFS UK weekly poster 4 with sound"><video src="media/mafs-w4.mp4" poster="media/mafs-w4.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile " style="--ar:640/362;--fw:1.768;--poster:url(media/mafs-filter.jpg)" data-video="media/mafs-filter.mp4" data-poster="media/mafs-filter.jpg" aria-label="Play MAFS UK TikTok filter with sound"><video src="media/mafs-filter.mp4" poster="media/mafs-filter.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button></div>
+</article>
+<article class="case tone-coral" id="case-4">
+  <div class="case-copy">
+    <p class="case-client">Channel 4</p>
+    <h3>Celebrity Gogglebox</h3>
+    <p class="case-line">Cinemagraphs, TikToks and a few very surprised faces for the nation’s favourite sofa.</p>
+    <ul class="chips"><li>TikTok</li><li>Snapchat</li><li>OOH</li></ul>
+  </div>
+  <div class="case-media" role="list"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/gogglebox-tiktok.jpg)" data-video="media/gogglebox-tiktok.mp4" data-poster="media/gogglebox-tiktok.jpg" aria-label="Play Celebrity Gogglebox TikTok with sound"><video src="media/gogglebox-tiktok.mp4" poster="media/gogglebox-tiktok.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/gogglebox-cine.jpg)" data-video="media/gogglebox-cine.mp4" data-poster="media/gogglebox-cine.jpg" aria-label="Play Celebrity Gogglebox cinemagraph with sound"><video src="media/gogglebox-cine.mp4" poster="media/gogglebox-cine.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile still " style="--ar:720/406;--fw:1.773;--poster:url(media/gogglebox-static.jpg)" data-image="media/gogglebox-static.jpg" aria-label="View Celebrity Gogglebox billboard"><img src="media/gogglebox-static.jpg" alt="Celebrity Gogglebox billboard" loading="lazy"><span class="vhs vhs-play">STILL</span></button></div>
+</article>
+<article class="case tone-blue" id="case-5">
+  <div class="case-copy">
+    <p class="case-client">Channel 4</p>
+    <h3>Big Boys</h3>
+    <p class="case-line">Friendship in all its glory, cut for the feed. Social promos, a pinch-to-zoom film and a Spotify ad.</p>
+    <ul class="chips"><li>Feed</li><li>Spotify</li><li>Statics</li></ul>
+  </div>
+  <div class="case-media" role="list"><button class="tile " style="--ar:540/608;--fw:0.888;--poster:url(media/bigboys-promo.jpg)" data-video="media/bigboys-promo.mp4" data-poster="media/bigboys-promo.jpg" aria-label="Play Big Boys social promo with sound"><video src="media/bigboys-promo.mp4" poster="media/bigboys-promo.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button><button class="tile " style="--ar:540/608;--fw:0.888;--poster:url(media/bigboys-pinch.jpg)" data-video="media/bigboys-pinch.mp4" data-poster="media/bigboys-pinch.jpg" aria-label="Play Big Boys pinch-zoom social with sound"><video src="media/bigboys-pinch.mp4" poster="media/bigboys-pinch.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button><button class="tile still " style="--ar:720/1280;--fw:0.562;--poster:url(media/bigboys-s1.jpg)" data-image="media/bigboys-s1.jpg" aria-label="View Big Boys coming soon static"><img src="media/bigboys-s1.jpg" alt="Big Boys coming soon static" loading="lazy"><span class="vhs vhs-play">STILL</span></button></div>
+</article>
+<article class="case tone-coral" id="case-6">
+  <div class="case-copy">
+    <p class="case-client">Channel 4</p>
+    <h3>The Great British Bake Off</h3>
+    <p class="case-line">Four presenters, four teasers, ten seconds each. Plus a Spotify ad that tells you to turn the sound on.</p>
+    <ul class="chips"><li>Teasers</li><li>Spotify</li><li>16:9</li></ul>
+  </div>
+  <div class="case-media" role="list"><button class="tile " style="--ar:720/406;--fw:1.773;--poster:url(media/bakeoff-noel.jpg)" data-video="media/bakeoff-noel.mp4" data-poster="media/bakeoff-noel.jpg" aria-label="Play Bake Off teaser: Noel with sound"><video src="media/bakeoff-noel.mp4" poster="media/bakeoff-noel.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:10</span></button><button class="tile " style="--ar:720/406;--fw:1.773;--poster:url(media/bakeoff-alison.jpg)" data-video="media/bakeoff-alison.mp4" data-poster="media/bakeoff-alison.jpg" aria-label="Play Bake Off teaser: Alison with sound"><video src="media/bakeoff-alison.mp4" poster="media/bakeoff-alison.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:10</span></button><button class="tile " style="--ar:720/406;--fw:1.773;--poster:url(media/bakeoff-nigella.jpg)" data-video="media/bakeoff-nigella.mp4" data-poster="media/bakeoff-nigella.jpg" aria-label="Play Bake Off teaser: Nigella with sound"><video src="media/bakeoff-nigella.mp4" poster="media/bakeoff-nigella.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:10</span></button><button class="tile " style="--ar:720/406;--fw:1.773;--poster:url(media/bakeoff-paul.jpg)" data-video="media/bakeoff-paul.mp4" data-poster="media/bakeoff-paul.jpg" aria-label="Play Bake Off teaser: Paul with sound"><video src="media/bakeoff-paul.mp4" poster="media/bakeoff-paul.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:10</span></button></div>
+</article>
+  </div>
+</section>
+
+<section class="more band" aria-labelledby="more-h">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="more-h">And plenty more</h2><p>Kitchen nightmares, sketch shows, late-night chat and the odd GIF.</p></div>
+    <div class="more-grid"><figure class="more-item"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/ramsay-1.jpg)" data-video="media/ramsay-1.mp4" data-poster="media/ramsay-1.jpg" aria-label="Play Ramsay’s Kitchen Nightmares USA with sound"><video src="media/ramsay-1.mp4" poster="media/ramsay-1.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><figcaption><strong>Ramsay’s Kitchen Nightmares USA</strong><span>Vertical social</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/mw-1.jpg)" data-video="media/mw-1.mp4" data-poster="media/mw-1.jpg" aria-label="Play Mitchell and Webb with sound"><video src="media/mw-1.mp4" poster="media/mw-1.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><figcaption><strong>Mitchell and Webb</strong><span>Vertical social</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:480/848;--fw:0.566;--poster:url(media/eeb-cine.jpg)" data-video="media/eeb-cine.mp4" data-poster="media/eeb-cine.jpg" aria-label="Play Everyone Else Burns with sound"><video src="media/eeb-cine.mp4" poster="media/eeb-cine.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><figcaption><strong>Everyone Else Burns</strong><span>Cinemagraph</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:540/676;--fw:0.799;--poster:url(media/ramsay-feed.jpg)" data-video="media/ramsay-feed.mp4" data-poster="media/ramsay-feed.jpg" aria-label="Play Ramsay’s Kitchen Nightmares USA with sound"><video src="media/ramsay-feed.mp4" poster="media/ramsay-feed.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button><figcaption><strong>Ramsay’s Kitchen Nightmares USA</strong><span>Feed 4:5</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/mw-2.jpg)" data-video="media/mw-2.mp4" data-poster="media/mw-2.jpg" aria-label="Play Mitchell and Webb with sound"><video src="media/mw-2.mp4" poster="media/mw-2.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><figcaption><strong>Mitchell and Webb</strong><span>Vertical social</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:540/676;--fw:0.799;--poster:url(media/wicks-feed.jpg)" data-video="media/wicks-feed.mp4" data-poster="media/wicks-feed.jpg" aria-label="Play Joe Wicks: Licensed to Kill with sound"><video src="media/wicks-feed.mp4" poster="media/wicks-feed.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button><figcaption><strong>Joe Wicks: Licensed to Kill</strong><span>Feed 4:5</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:720/406;--fw:1.773;--poster:url(media/lycett-clip.jpg)" data-video="media/lycett-clip.mp4" data-poster="media/lycett-clip.jpg" aria-label="Play Late Night Lycett with sound"><video src="media/lycett-clip.mp4" poster="media/lycett-clip.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:18</span></button><figcaption><strong>Late Night Lycett</strong><span>Social clip</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:480/270;--fw:1.778;--poster:url(media/c4plus-smash.jpg)" data-video="media/c4plus-smash.mp4" data-poster="media/c4plus-smash.jpg" aria-label="Play Channel 4+ with sound"><video src="media/c4plus-smash.mp4" poster="media/c4plus-smash.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:02</span></button><figcaption><strong>Channel 4+</strong><span>GIF</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:640/362;--fw:1.768;--poster:url(media/mafs-polls.jpg)" data-video="media/mafs-polls.mp4" data-poster="media/mafs-polls.jpg" aria-label="Play Married at First Sight UK with sound"><video src="media/mafs-polls.mp4" poster="media/mafs-polls.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:02</span></button><figcaption><strong>Married at First Sight UK</strong><span>Polls</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/ramsay-2.jpg)" data-video="media/ramsay-2.mp4" data-poster="media/ramsay-2.jpg" aria-label="Play Ramsay’s Kitchen Nightmares USA with sound"><video src="media/ramsay-2.mp4" poster="media/ramsay-2.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:15</span></button><figcaption><strong>Ramsay’s Kitchen Nightmares USA</strong><span>Vertical social</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:480/854;--fw:0.562;--poster:url(media/mafs-motion.jpg)" data-video="media/mafs-motion.mp4" data-poster="media/mafs-motion.jpg" aria-label="Play Married at First Sight UK with sound"><video src="media/mafs-motion.mp4" poster="media/mafs-motion.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><figcaption><strong>Married at First Sight UK</strong><span>Motion poster</span></figcaption></figure><figure class="more-item"><button class="tile " style="--ar:540/610;--fw:0.885;--poster:url(media/bigboys-spotify.jpg)" data-video="media/bigboys-spotify.mp4" data-poster="media/bigboys-spotify.jpg" aria-label="Play Big Boys with sound"><video src="media/bigboys-spotify.mp4" poster="media/bigboys-spotify.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button><figcaption><strong>Big Boys</strong><span>Spotify ad</span></figcaption></figure></div>
+  </div>
+</section>
+
+<section class="reactive band" id="reactive">
+  <div class="wrap">
+    <div class="copy">
+      <p class="eyebrow">Topical / reactive</p>
+      <h2>Sometimes simplicity is the key.</h2>
+      <p>When the whole internet is talking about one thing, the smartest move is often the simplest: a quick, clever reaction that puts you in the conversation while it’s still happening. Trending sounds, news moments, the meme of the week.</p>
+      <p class="kicker">Spotted fast, made fast, posted fast.</p>
+      <p class="aside">(Timing is everything. Overthinking is the enemy.)</p>
+    </div>
+    <figure class="newswall">
+      <div class="news-grid"><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g01.jpg)" data-video="media/newswall-g01.mp4" data-poster="media/newswall-g01.jpg" aria-label="Play Channel 4 Newswall GIF 1 with sound"><video src="media/newswall-g01.mp4" poster="media/newswall-g01.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g02.jpg)" data-video="media/newswall-g02.mp4" data-poster="media/newswall-g02.jpg" aria-label="Play Channel 4 Newswall GIF 2 with sound"><video src="media/newswall-g02.mp4" poster="media/newswall-g02.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g03.jpg)" data-video="media/newswall-g03.mp4" data-poster="media/newswall-g03.jpg" aria-label="Play Channel 4 Newswall GIF 3 with sound"><video src="media/newswall-g03.mp4" poster="media/newswall-g03.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:05</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g04.jpg)" data-video="media/newswall-g04.mp4" data-poster="media/newswall-g04.jpg" aria-label="Play Channel 4 Newswall GIF 4 with sound"><video src="media/newswall-g04.mp4" poster="media/newswall-g04.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g05.jpg)" data-video="media/newswall-g05.mp4" data-poster="media/newswall-g05.jpg" aria-label="Play Channel 4 Newswall GIF 5 with sound"><video src="media/newswall-g05.mp4" poster="media/newswall-g05.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g06.jpg)" data-video="media/newswall-g06.mp4" data-poster="media/newswall-g06.jpg" aria-label="Play Channel 4 Newswall GIF 6 with sound"><video src="media/newswall-g06.mp4" poster="media/newswall-g06.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g07.jpg)" data-video="media/newswall-g07.mp4" data-poster="media/newswall-g07.jpg" aria-label="Play Channel 4 Newswall GIF 7 with sound"><video src="media/newswall-g07.mp4" poster="media/newswall-g07.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g08.jpg)" data-video="media/newswall-g08.mp4" data-poster="media/newswall-g08.jpg" aria-label="Play Channel 4 Newswall GIF 8 with sound"><video src="media/newswall-g08.mp4" poster="media/newswall-g08.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g09.jpg)" data-video="media/newswall-g09.mp4" data-poster="media/newswall-g09.jpg" aria-label="Play Channel 4 Newswall GIF 9 with sound"><video src="media/newswall-g09.mp4" poster="media/newswall-g09.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:05</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g10.jpg)" data-video="media/newswall-g10.mp4" data-poster="media/newswall-g10.jpg" aria-label="Play Channel 4 Newswall GIF 10 with sound"><video src="media/newswall-g10.mp4" poster="media/newswall-g10.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g11.jpg)" data-video="media/newswall-g11.mp4" data-poster="media/newswall-g11.jpg" aria-label="Play Channel 4 Newswall GIF 11 with sound"><video src="media/newswall-g11.mp4" poster="media/newswall-g11.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:05</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g12.jpg)" data-video="media/newswall-g12.mp4" data-poster="media/newswall-g12.jpg" aria-label="Play Channel 4 Newswall GIF 12 with sound"><video src="media/newswall-g12.mp4" poster="media/newswall-g12.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g13.jpg)" data-video="media/newswall-g13.mp4" data-poster="media/newswall-g13.jpg" aria-label="Play Channel 4 Newswall GIF 13 with sound"><video src="media/newswall-g13.mp4" poster="media/newswall-g13.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g14.jpg)" data-video="media/newswall-g14.mp4" data-poster="media/newswall-g14.jpg" aria-label="Play Channel 4 Newswall GIF 14 with sound"><video src="media/newswall-g14.mp4" poster="media/newswall-g14.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g15.jpg)" data-video="media/newswall-g15.mp4" data-poster="media/newswall-g15.jpg" aria-label="Play Channel 4 Newswall GIF 15 with sound"><video src="media/newswall-g15.mp4" poster="media/newswall-g15.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g16.jpg)" data-video="media/newswall-g16.mp4" data-poster="media/newswall-g16.jpg" aria-label="Play Channel 4 Newswall GIF 16 with sound"><video src="media/newswall-g16.mp4" poster="media/newswall-g16.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:03</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g17.jpg)" data-video="media/newswall-g17.mp4" data-poster="media/newswall-g17.jpg" aria-label="Play Channel 4 Newswall GIF 17 with sound"><video src="media/newswall-g17.mp4" poster="media/newswall-g17.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g18.jpg)" data-video="media/newswall-g18.mp4" data-poster="media/newswall-g18.jpg" aria-label="Play Channel 4 Newswall GIF 18 with sound"><video src="media/newswall-g18.mp4" poster="media/newswall-g18.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:03</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g19.jpg)" data-video="media/newswall-g19.mp4" data-poster="media/newswall-g19.jpg" aria-label="Play Channel 4 Newswall GIF 19 with sound"><video src="media/newswall-g19.mp4" poster="media/newswall-g19.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g20.jpg)" data-video="media/newswall-g20.mp4" data-poster="media/newswall-g20.jpg" aria-label="Play Channel 4 Newswall GIF 20 with sound"><video src="media/newswall-g20.mp4" poster="media/newswall-g20.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:03</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g21.jpg)" data-video="media/newswall-g21.mp4" data-poster="media/newswall-g21.jpg" aria-label="Play Channel 4 Newswall GIF 21 with sound"><video src="media/newswall-g21.mp4" poster="media/newswall-g21.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g22.jpg)" data-video="media/newswall-g22.mp4" data-poster="media/newswall-g22.jpg" aria-label="Play Channel 4 Newswall GIF 22 with sound"><video src="media/newswall-g22.mp4" poster="media/newswall-g22.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g23.jpg)" data-video="media/newswall-g23.mp4" data-poster="media/newswall-g23.jpg" aria-label="Play Channel 4 Newswall GIF 23 with sound"><video src="media/newswall-g23.mp4" poster="media/newswall-g23.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:04</span></button><button class="tile sq" style="--ar:360/360;--fw:1.000;--poster:url(media/newswall-g24.jpg)" data-video="media/newswall-g24.mp4" data-poster="media/newswall-g24.jpg" aria-label="Play Channel 4 Newswall GIF 24 with sound"><video src="media/newswall-g24.mp4" poster="media/newswall-g24.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:06</span></button></div>
+      <button class="tile wide" style="--ar:720/406;--fw:1.773;--poster:url(media/newswall-break.jpg)" data-video="media/newswall-break.mp4" data-poster="media/newswall-break.jpg" aria-label="Play Channel 4 Newswall: Break the internet with sound"><video src="media/newswall-break.mp4" poster="media/newswall-break.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:20</span></button>
+      <figcaption>Channel 4 Newswall: one-word reactive GIFs, plus the film that launched it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="services band" id="what">
+  <div class="wrap">
+    <div class="sec-head"><h2>Everything a content team does.<br>Without hiring one.</h2></div>
+    <ul class="svc-grid"><li class="svc"><h4>Social strategy</h4><p>What to post, where and why</p></li><li class="svc"><h4>Content creation</h4><p>Shot, edited and delivered</p></li><li class="svc"><h4>Series and formats</h4><p>Shows people come back for</p></li><li class="svc"><h4>Copywriting</h4><p>Scripts, captions and hooks</p></li><li class="svc"><h4>Art direction</h4><p>A look that’s unmistakably yours</p></li><li class="svc"><h4>Directing</h4><p>Customers, staff and talent on camera</p></li><li class="svc"><h4>Trends and reactive</h4><p>Fast ideas when the internet moves</p></li><li class="svc"><h4>Every platform</h4><p>Cut for TikTok, YouTube, Facebook and Instagram</p></li><li class="svc svc-hi"><h4>Reporting</h4><p>Monthly results, then more of what works</p></li></ul>
+  </div>
+</section>
+
+<section class="meet band" id="meet">
+  <div class="wrap">
+    <div class="copy">
+      <p class="eyebrow">Meet Brian&amp;Brian <span class="aside">(that’s us)</span></p>
+      <h2>Just two guys not called Brian.</h2>
+      <p>We’re Lewis Clements and Chris Rice. We have over 15 years’ experience in the creative industries, and formed during our time at 4creative, Channel 4’s in-house agency, making social-first, integrated campaigns for some of the UK’s biggest TV shows.</p>
+      <p>We’re multi-award-winning creatives, and we want to use those skills to elevate brands’ social output, reach and engagement.</p>
+    </div>
+    <button class="tile us-tile" style="--ar:480/720;--fw:0.667;--poster:url(media/us.jpg)" data-video="media/us.mp4" data-poster="media/us.jpg" aria-label="Play Lewis and Chris with sound"><video src="media/us.mp4" poster="media/us.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><span class="vhs vhs-play">PLAY &#9654;</span><span class="vhs vhs-tc">SP 0:00:12</span></button>
+  </div>
+</section>
+
+<section class="contact band" id="talk">
+  <div class="wrap">
+    <p class="eyebrow">Work with us</p>
+    <h2>Let’s talk.</h2>
+    <div class="contact-rows">
+      <div class="row"><span class="lbl">Email</span><span class="val" id="v-email">wearebrianandbrian@gmail.com</span><button class="copy-btn" type="button" data-copy="v-email">Copy</button></div>
+      <div class="row"><span class="lbl">Call</span><span class="val" id="v-phone">07397 574 568</span><button class="copy-btn" type="button" data-copy="v-phone">Copy</button></div>
+      <div class="row"><span class="lbl">Web</span><a class="val" href="https://wearebrianandbrian.com" target="_blank" rel="noopener">wearebrianandbrian.com</a></div>
+    </div>
+    <p class="aside">Happy to come to you. We’ll bring the Brians.</p>
+  </div>
+</section>
+</main>
+
+<footer class="band">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="heads.png" alt=""><span>Brian&amp;Brian</span></a>
+    <p>Content Creators | Social Specialists | Creative Consultants</p>
+    <p>© 2026 Brian&amp;Brian</p>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Playing work">
+  <button class="lb-close" type="button" id="lb-close">Close ✕</button>
+  <div class="lb-inner" id="lb-inner"></div>
+</div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // play tiles only while on screen
+  const vids = [...document.querySelectorAll('.tile video')];
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      const v = e.target;
+      if (e.isIntersecting) { v.preload = 'auto'; const p = v.play(); if (p) p.catch(() => {}); }
+      else v.pause();
+    }), { rootMargin: '120px 0px' });
+    vids.forEach(v => io.observe(v));
+  }
+  // lightbox
+  const lb = document.getElementById('lb'), inner = document.getElementById('lb-inner');
+  let last = null;
+  function open(t) {
+    last = t; inner.innerHTML = '';
+    if (t.dataset.video) {
+      const v = document.createElement('video');
+      v.src = t.dataset.video; v.poster = t.dataset.poster; v.controls = true; v.playsInline = true; v.autoplay = true; v.loop = true;
+      inner.appendChild(v); const p = v.play(); if (p) p.catch(() => {});
+    } else {
+      const i = document.createElement('img'); i.src = t.dataset.image; i.alt = t.getAttribute('aria-label') || ''; inner.appendChild(i);
+    }
+    lb.hidden = false; document.getElementById('lb-close').focus();
+  }
+  function close() { inner.innerHTML = ''; lb.hidden = true; if (last) last.focus(); }
+  document.querySelectorAll('.tile').forEach(t => t.addEventListener('click', () => open(t)));
+  document.getElementById('lb-close').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && !lb.hidden) close(); });
+  // copy buttons
+  document.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', () => {
+    const el = document.getElementById(b.dataset.copy), txt = el.textContent.trim();
+    const done = () => { b.textContent = 'Copied'; b.dataset.done = ''; setTimeout(() => { b.textContent = 'Copy'; delete b.dataset.done; }, 1800); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected'; };
+    try { navigator.clipboard.writeText(txt).then(done, fallback); } catch (_) { fallback(); }
+  }));
+})();
+</script>
