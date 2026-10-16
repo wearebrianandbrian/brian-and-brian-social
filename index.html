@@ -215,6 +215,13 @@ footer .wrap{padding-block:36px;display:flex;flex-wrap:wrap;justify-content:spac
 @media (max-width:900px){.tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tools-item.wide{grid-column:span 2}.tools-head{grid-template-columns:1fr}}
 @media (max-width:560px){.tools-grid{grid-template-columns:1fr}.tools-item.wide{grid-column:auto}}
 
+
+.bb-logo{display:block;height:44px;width:auto;overflow:visible}
+footer .bb-logo{height:38px}
+.bb-word{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;font-size:155px;letter-spacing:-.035em;fill:var(--white)}
+.bbh{fill:var(--heads)}.bbw{fill:#fff}.bbp{fill:#2F6BFF}
+@media (max-width:560px){.bb-logo{height:34px}}
+
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:50;background:rgba(10,7,26,.92);display:grid;place-items:center;padding:max(20px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .lb-inner{position:relative;max-width:min(92vw,1100px);max-height:86vh;display:grid}
@@ -246,7 +253,7 @@ footer .wrap{padding-block:36px;display:flex;flex-wrap:wrap;justify-content:spac
   .news-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
   .svc-grid,.versus{grid-template-columns:1fr}
   .more-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-  .brand span{display:none}
+  
   .nav .btn{padding:9px 14px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -259,7 +266,7 @@ footer .wrap{padding-block:36px;display:flex;flex-wrap:wrap;justify-content:spac
 
 <header class="nav band">
   <div class="wrap">
-    <a class="brand" href="#top"><img src="heads.png" alt=""><span>Brian&amp;Brian</span></a>
+    <a class="brand" href="#top"><svg class="bb-logo" viewBox="0 0 830 222" role="img" aria-label="Brian&amp;Brian"><g transform="translate(372 0)"><g class="bbh"><rect x="58" y="60" width="34" height="44" rx="17"/><path d="M0 78 A75 70 0 0 1 150 78 Z"/></g><g class="bbh"><rect x="200" y="60" width="34" height="44" rx="17"/><path d="M142 78 A75 70 0 0 1 292 78 Z"/></g><circle class="bbw" cx="57.5" cy="44" r="11.5"/><circle class="bbp" cx="61.5" cy="44" r="6.5"/><circle class="bbw" cx="92.5" cy="44" r="11.5"/><circle class="bbp" cx="96.5" cy="44" r="6.5"/><circle class="bbw" cx="199.5" cy="44" r="11.5"/><circle class="bbp" cx="203.5" cy="44" r="6.5"/><circle class="bbw" cx="234.5" cy="44" r="11.5"/><circle class="bbp" cx="238.5" cy="44" r="6.5"/></g><text x="2" y="216" textLength="826" lengthAdjust="spacing" class="bb-word">Brian&amp;Brian</text></svg></a>
     <ol>
       <li><a href="#work"><span>01</span>Work</a></li>
       <li><a href="#tools"><span>02</span>On the Tools</a></li>
@@ -430,7 +437,7 @@ footer .wrap{padding-block:36px;display:flex;flex-wrap:wrap;justify-content:spac
 
 <footer class="band">
   <div class="wrap">
-    <a class="brand" href="#top"><img src="heads.png" alt=""><span>Brian&amp;Brian</span></a>
+    <a class="brand" href="#top"><svg class="bb-logo" viewBox="0 0 830 222" role="img" aria-label="Brian&amp;Brian"><g transform="translate(372 0)"><g class="bbh"><rect x="58" y="60" width="34" height="44" rx="17"/><path d="M0 78 A75 70 0 0 1 150 78 Z"/></g><g class="bbh"><rect x="200" y="60" width="34" height="44" rx="17"/><path d="M142 78 A75 70 0 0 1 292 78 Z"/></g><circle class="bbw" cx="57.5" cy="44" r="11.5"/><circle class="bbp" cx="61.5" cy="44" r="6.5"/><circle class="bbw" cx="92.5" cy="44" r="11.5"/><circle class="bbp" cx="96.5" cy="44" r="6.5"/><circle class="bbw" cx="199.5" cy="44" r="11.5"/><circle class="bbp" cx="203.5" cy="44" r="6.5"/><circle class="bbw" cx="234.5" cy="44" r="11.5"/><circle class="bbp" cx="238.5" cy="44" r="6.5"/></g><text x="2" y="216" textLength="826" lengthAdjust="spacing" class="bb-word">Brian&amp;Brian</text></svg></a>
     <p>Content Creators | Social Specialists | Creative Consultants</p>
     <p>© 2026 Brian&amp;Brian</p>
   </div>
